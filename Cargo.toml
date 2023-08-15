@@ -11,11 +11,17 @@ edition = "2021"
 ### crates.io metadata ###
 description = "Calculates and verifies the checksums of files using various digest algorithms, including MD5, SHA256, and more."
 repository = "https://github.com/LikeLakers2/checksum_cli"
-keywords = []
-categories = []
+keywords = [
+	"checksum",
+]
+categories = [
+	"command-line-utilities",
+	"cryptography",
+	"filesystem",
+]
 
-# We only use the `_cli` suffix for locating the crate on crates.io, so we use
-# the below to remove the suffix from the installed binary name.
+# We'll only use the `_cli` suffix for locating the crate on crates.io, so we
+# use the below to remove the suffix from the installed binary name.
 [[bin]]
 name = "checksum"
 path = "src/main.rs"
