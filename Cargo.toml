@@ -1,0 +1,71 @@
+[package]
+name = "checksum_cli"
+version = "0.1.0"
+authors = ["LikeLakers2"]
+license = "Unlicense"
+
+### Cargo/Rust options ###
+edition = "2021"
+#rust-version = 
+
+### crates.io metadata ###
+description = "Calculates and verifies the checksums of files using various digest algorithms, including MD5, SHA256, and more."
+repository = "https://github.com/LikeLakers2/checksum_cli"
+keywords = []
+categories = []
+
+# We only use the `_cli` suffix for locating the crate on crates.io, so we use
+# the below to remove the suffix from the installed binary name.
+[[bin]]
+name = "checksum"
+path = "src/main.rs"
+
+[dependencies]
+	[dependencies.clap]
+	version = "4"
+	features = ["derive"]
+	
+	[dependencies.itertools]
+	version = "0.11"
+	
+# Digest algorithm dependencies
+	[dependencies.digest]
+	version = "0.10"
+	
+	[dependencies.md-5]
+	# Yes, I'm aware that the name looks odd. But `md-5` is the crate managed by
+	# the RustCrypto group, not `md5`.
+	version = "0.10"
+	optional = true
+	
+	[dependencies.sha1]
+	version = "0.10"
+	optional = true
+	
+	[dependencies.sha2]
+	version = "0.10"
+	optional = true
+	
+	[dependencies.sha3]
+	version = "0.10"
+	optional = true
+	
+# Non-digest algorithm dependencies
+	[dependencies.crc32fast]
+	version = "1"
+	optional = true
+
+[features]
+default = [
+	"algo-crc32",
+	"algo-md5",
+	"algo-sha1",
+	"algo-sha2",
+	"algo-sha3",
+]
+
+algo-crc32 = ["dep:crc32fast"]
+algo-md5 = ["dep:md-5"]
+algo-sha1 = ["dep:sha1"]
+algo-sha2 = ["dep:sha2"]
+algo-sha3 = ["dep:sha3"]
